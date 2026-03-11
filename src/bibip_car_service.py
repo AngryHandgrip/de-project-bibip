@@ -164,18 +164,18 @@ class CarService:
         sale_pos = self._find_object(self.sale_idx_dir, sales_number)
         if sale_pos is None:
             raise ValueError(f"Sale number {sales_number} not found")
-        with open(self.sale_dir, 'r+') as f:
+        with open(self.sale_dir, 'r+', newline='\n') as f:
             f.seek(sale_pos * 501)
             sale = f.read(500).rstrip().split(';')[:-1]
             vin = sale[1]
             f.seek(sale_pos * 501)
-            f.write(';'.join(sale) + ';True'.ljust(500) + '\n')
+            f.write((';'.join(sale) + ';True').ljust(500) + '\n')
         
         car_pos = self._find_object(self.car_idx_dir, vin)
         if car_pos is None:
             raise ValueError(f"VIN {vin} not found")
         
-        with open(self.car_dir, 'r+') as f:
+        with open(self.car_dir, 'r+', newline='\n') as f:
             f.seek(car_pos * 501)
             _, model, price, date_start, _ = f.read(500).rstrip().split(';')
             f.seek(car_pos * 501)
