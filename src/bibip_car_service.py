@@ -25,7 +25,6 @@ class CarService:
                     return pos
         return
 
-
     # Задание 1. Сохранение автомобилей и моделей
     def add_model(self, model: Model) -> Model:
         index = SortedDict()
@@ -97,7 +96,6 @@ class CarService:
                 if status == 'available':
                     available_cars.append(Car(vin=vin, model=int(model), price=Decimal(price), date_start=date_start, status=CarStatus(status)))
         
-        # available_cars.sort(key=lambda x: x.vin) нужно же сортировать было
         return available_cars
 
     # Задание 4. Детальная информация
@@ -184,7 +182,6 @@ class CarService:
             f.write(f'{vin};{model};{price};{date_start};available'.ljust(500) + '\n')
 
         return Car(vin=vin, model=model, price=price, date_start=date_start, status=CarStatus.available)
-
 
     # Задание 7. Самые продаваемые модели
     def top_models_by_sales(self) -> list[ModelSaleStats]:
